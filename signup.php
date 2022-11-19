@@ -24,7 +24,7 @@
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            $sql0 = "SELECT email FROM users;";
+            $sql0 = "SELECT email FROM admins;";
             $result0 = mysqli_query($conn, $sql0);
 
             $count = 0;
@@ -36,7 +36,7 @@
             }
 
             if($count == 0){
-                $sql = "INSERT INTO users(username, email, password)
+                $sql = "INSERT INTO admins(username, email, password)
                 VALUES ('$username','$email','$password');";
 
                 $result = mysqli_query($conn, $sql);
@@ -51,7 +51,7 @@
 
     <div class="d-flex justify-content-center align-items-center formLogin">
         
-        <form action="" method="POST" data-parsley-validate="">
+        <form action="" method="POST">
             <div class="text-center mb-4">
                 <img class="books" src="assets/img/writing.png"/>
                 <h1 id="title">Sign Up</h1>
@@ -59,17 +59,17 @@
             
             <div class="pb-3">
                 <label for="username_inpt" id="usernameLabel">Username</label>
-                <input type="text" id="username_inpt" class="form-control" name="username">
+                <input type="text" id="username_inpt" class="form-control" name="username" required>
             </div>
 
             <div class="pb-3">
                 <label for="email_inpt" id="emaiLabel">Email</label>
-                <input type="email" id="email_inpt" class="form-control" name="email" data-parsley-type="email" required>
+                <input type="email" id="email_inpt" class="form-control" name="email" required>
             </div>
 
             <div>
                 <label for="pass_inpt" id="passLabel">Password</label>
-                <input type="password" id="pass_inpt" class="form-control" size="30" name="password">
+                <input type="password" id="pass_inpt" class="form-control" size="30" name="password" required>
             </div>
 
             <div class="mt-2 text-center">

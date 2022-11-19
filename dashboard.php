@@ -4,9 +4,13 @@
     session_start();
     
     $id = $_SESSION['id'];
-    $sql = "SELECT username FROM users WHERE id = '$id';";
+    $sql = "SELECT username FROM admins WHERE id = '$id';";
     $result = mysqli_query($conn, $sql);
     $name = mysqli_fetch_column($result, 0);
+
+    if(!isset($_SESSION['id'])){
+        header('location: login.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +33,7 @@
 
     <nav class="navbar navbar-light navbar1">
         <span class="navbar-brand fs-2 ms-3 text-white ">Dashboard</span>
-        <a href="login.html"><button class="border-0 rounded-pill py-2 px-3 fw-bold navbar-btn text-white me-2"><i class="bi bi-box-arrow-right"></i>&nbsp;Log out</button></a>
+        <a href="logout.php"><button class="border-0 rounded-pill py-2 px-3 fw-bold navbar-btn text-white me-2"><i class="bi bi-box-arrow-right"></i>&nbsp;Log out</button></a>
     </nav>
 
         
@@ -39,7 +43,7 @@
                 <a href="#" class="d-flex justify-content-center mt-5">
                     <img src="./assets/img/batman.png" class="rounded-circle" style="width: 75%; height: auto; position: relative;">
                 </a>
-                <a href="#" class="text-decoration-none"><span class="d-flex justify-content-center text-white fw-bold">Username</span></a>
+                <a href="#" class="text-decoration-none"><span class="d-flex justify-content-center text-white fw-bold"><?php echo $name;?></span></a>
                 <hr class="text-white">
                 <ul class="list-unstyled">
                     <li><a href="dashboard.html" class="dashboard text-decoration-none d-flex justify-content-center fw-bold mt-5 text-white" style="background-color:#3F2918;"><i class="bi bi-hdd-stack"></i>&nbsp;Dashboard</a></li>

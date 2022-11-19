@@ -24,7 +24,7 @@
             $email = $_POST['email'];
             $password = $_POST['password'];
             
-            $sql = "SELECT id, email, password FROM users WHERE email = '$email' and password = '$password';";
+            $sql = "SELECT id, email, password FROM admins WHERE email = '$email' and password = '$password';";
             
             $result = mysqli_query($conn, $sql);
             
@@ -51,12 +51,12 @@
         
         <div class="pb-3">
             <label for="email_inpt" id="emaiLabel">Email</label>
-            <input type="text" id="email_inpt" class="form-control" name="email">
+            <input type="email" id="email_inpt" class="form-control" name="email" required>
         </div>
 
         <div>
             <label for="pass_inpt" id="passLabel">Password</label>
-            <input type="password" id="pass_inpt" class="form-control " size="25" name="password">
+            <input type="password" id="pass_inpt" class="form-control " size="25" name="password" required>
         </div>
 
         <div class="mt-2 text-center">
