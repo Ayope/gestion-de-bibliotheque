@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 19, 2022 at 08:42 AM
+-- Generation Time: Nov 20, 2022 at 05:06 PM
 -- Server version: 5.7.36
 -- PHP Version: 8.1.0
 
@@ -37,28 +37,16 @@ CREATE TABLE IF NOT EXISTS `admins` (
   `birthdate` date DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admins`
 --
 
 INSERT INTO `admins` (`id`, `username`, `email`, `password`, `phone`, `birthdate`, `city`) VALUES
-(1, 'ayoub', 'ayoubsamir093@gmail.com', '123', NULL, NULL, NULL),
-(2, 'hero', 'hero@gmail.com', '123', NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `author`
---
-
-DROP TABLE IF EXISTS `author`;
-CREATE TABLE IF NOT EXISTS `author` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+(1, 'ayoub1', 'ayoubsamir093@gmail.com', '123', '', NULL, ''),
+(2, 'hero', 'hero@gmail.com', '123', NULL, NULL, NULL),
+(3, 'superman', 'super@gmail.com', '123', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -73,19 +61,20 @@ CREATE TABLE IF NOT EXISTS `book` (
   `name` varchar(255) DEFAULT NULL,
   `publicationYear` year(4) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
-  `author_id` int(11) DEFAULT NULL,
+  `author` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `isbn` (`isbn`),
-  KEY `category_id` (`category_id`),
-  KEY `author_id` (`author_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  KEY `category_id` (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `book`
 --
 
-INSERT INTO `book` (`id`, `isbn`, `name`, `publicationYear`, `category_id`, `author_id`) VALUES
-(1, 12314, 'fafa1r1', 2001, 141414, 4141);
+INSERT INTO `book` (`id`, `isbn`, `name`, `publicationYear`, `category_id`, `author`) VALUES
+(8, 56, 'Elvis Delacruz', 2012, 1, 'A ut cum dolores adi'),
+(9, 94, 'Driscoll ', 2023, 2, 'Sunt illum lorem a'),
+(10, 53, 'Deborah Graves', 2018, 3, 'Et enim magnam illum');
 
 -- --------------------------------------------------------
 
@@ -98,7 +87,26 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'literature'),
+(2, 'science'),
+(3, 'other');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `book`
+--
+ALTER TABLE `book`
+  ADD CONSTRAINT `book_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
