@@ -26,23 +26,12 @@
             $category = $_POST['Category'];
             $year = $_POST['Year'];
 
-            $sql = "SELECT isbn, name, publicationYear, category_id, author 
-            FROM book 
-            WHERE isbn = '$isbn' and  name = '$name' and publicationYear = '$year' and category_id = '$category' and author = '$author' ";
+            $sql =  "UPDATE book 
+            SET `isbn`='$isbn',`name`='$name',`publicationYear`='$year',`category_id`='$category',`author`='$author' 
+            WHERE id = $_GET[id];";
             $result = mysqli_query($conn, $sql);
 
-            $row = mysqli_num_rows($result);
-
-            if($row != 0){
-                echo '<div class="alert alert-danger" role="alert">Change Something</div>';
-            }else{
-                $sql =  "UPDATE book 
-                SET `isbn`='$isbn',`name`='$name',`publicationYear`='$year',`category_id`='$category',`author`='$author' 
-                WHERE id = $_GET[id];";
-                $result = mysqli_query($conn, $sql);
-
-                header('location: booksList.php');
-            }
+            header('location: booksList.php');
         }
 
         $sql = "SELECT id, isbn, name, publicationYear, author, category_id
@@ -54,7 +43,7 @@
     
     ?>
 
-    <form action="" method="POST">
+    <form action="" method="POST" name="loginForm">
         <div>
             <label for="isbn">ISBN</label>
             <input type="number" name="ISBN" id="isbn" value="<?=$row['isbn'];?>" required>

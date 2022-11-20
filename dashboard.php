@@ -29,43 +29,47 @@
     <!---->
 </head>
 <body >
-    <?php echo "Welcome ". $name;?>
+    <a href="logout.php"><button class="border-0 rounded-pill py-2 px-3 fw-bold navbar-btn text-white me-2"><i class="bi bi-box-arrow-right"></i>&nbsp;Log out</button></a>
+    <a href="accountSettings.php"><button>Account Settings</button></a>
+    <?php 
+        $sql = "SELECT * FROM `admins`";
+        $result = mysqli_query($conn, $sql);
+        $numofUsers = mysqli_num_rows($result);
 
-    <nav class="navbar navbar-light navbar1">
-        <span class="navbar-brand fs-2 ms-3 text-white ">Dashboard</span>
-        <a href="logout.php"><button class="border-0 rounded-pill py-2 px-3 fw-bold navbar-btn text-white me-2"><i class="bi bi-box-arrow-right"></i>&nbsp;Log out</button></a>
-    </nav>
+        $sql1 = "SELECT * FROM `book`;";
+        $result1 = mysqli_query($conn, $sql1);
+        $numofBooks = mysqli_num_rows($result1);
+
+        $sql2 = "SELECT * FROM `book` WHERE category_id = 1;";
+        $result2 = mysqli_query($conn, $sql2);
+        $numofLitertBooks = mysqli_num_rows($result2);
 
         
-    <div class="col-8 main-container d-grid ">
-        <div class="sidebar" id="sideNav">
-            <div class="header-box">
-                <a href="#" class="d-flex justify-content-center mt-5">
-                    <img src="./assets/img/batman.png" class="rounded-circle" style="width: 75%; height: auto; position: relative;">
-                </a>
-                <a href="#" class="text-decoration-none"><span class="d-flex justify-content-center text-white fw-bold"><?php echo $name;?></span></a>
-                <hr class="text-white">
-                <ul class="list-unstyled">
-                    <li><a href="dashboard.html" class="dashboard text-decoration-none d-flex justify-content-center fw-bold mt-5 text-white" style="background-color:#3F2918;"><i class="bi bi-hdd-stack"></i>&nbsp;Dashboard</a></li>
-                    
-                    <div class="multi-level text-center fw-bold mt-4">
-                        <div class="item">
-                            <input type="checkbox" id="DropBooks">
-                            <label for="DropBooks" class="bookdrop text-white w-100"><i class="bi bi-book bookicon"></i>&nbsp;Books&nbsp;<img src="./assets/img/down.png" class="arrow"></label>
-                            
-                            <ul class="list-unstyled ">
-                                <a href="addBook.html" class="text-decoration-none fw-light text-white w-100 "><li class="pt-2 ps-5 bookop1">Add Book</li></a>
-                                <a href="booksList.html" class="text-decoration-none fw-light text-white w-100 "><li class="pt-2 ps-5 bookop2">Books list</li></a>
-                            </ul>
+        $sql3 = "SELECT * FROM `book`WHERE category_id = 2;";
+        $result3 = mysqli_query($conn, $sql3);
+        $numofScincBooks = mysqli_num_rows($result3);
 
-                        </div>
-                    </div>
-                </ul>
-            </div>
-        </div>
-    </div> 
+        
+        $sql4 = "SELECT * FROM `book` WHERE category_id = 3;";
+        $result4 = mysqli_query($conn, $sql4);
+        $numofOtherBooks = mysqli_num_rows($result4);
+    ?>
+    <?php echo "Welcome ". $name;?>
+    
+    <div class="border border-darker bg-white">
+        <p>Total Books <span><?=$numofBooks;?></span></p>
+    </div>
 
     
+    <div class="border border-darker bg-white">
+        <p>Total Users <span><?=$numofUsers;?></span></p>
+    </div>
 
+    
+    <div class="border border-darker bg-white">
+        <p>Total Books in literature <span><?=$numofLitertBooks;?></span></p>
+        <p>Total Books in science <span><?=$numofScincBooks;?></span></p>
+        <p>Total Books in Others <span><?=$numofOtherBooks?></span></p>
+    </div>
 </body>
 </html>

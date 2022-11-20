@@ -1,7 +1,11 @@
 <?php
     include 'db.php';
 
-    session_start()
+    session_start();
+    
+    if(isset($_SESSION['id'])){
+        header('location: dashboard.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -30,14 +34,12 @@
             
             $row = mysqli_num_rows($result);
             if($row != 0){
+                $id = mysqli_fetch_column($result, 0);
+                $_SESSION['id'] = $id;
                 header("location: dashboard.php");
             }else{
                 echo '<div class="alert alert-danger" role="alert">Account not Exist</div>';
             }
-            
-            $id = mysqli_fetch_column($result, 0);
-            $_SESSION['id'] = $id;
-
         }
     ?>
 
@@ -70,5 +72,6 @@
         </form>
 
     </div>
+
 </body>
 </html>
