@@ -18,6 +18,14 @@
     <!---->
 </head>
 <body>
+    <?php 
+      if(isset($_POST['confirm_delete'])){
+        $id = $_POST['id_to_delete'];
+        $sql = "DELETE FROM book WHERE id='$id';";
+        $result = mysqli_query($conn, $sql);
+        header("Location:booksList.php");
+      }
+    ?>
     <table class="table table-bordered border-dark">
     <thead>
         <tr>
@@ -33,10 +41,10 @@
     </thead>
     <tbody>
         <?php
-            $sql ="SELECT book.id, book.isbn, book.name, book.publicationYear, book.author, category.name as category
-            FROM book, category 
-            WHERE category_id = category.id";
-            $result = mysqli_query($conn, $sql);
+          $sql ="SELECT book.id, book.isbn, book.name, book.publicationYear, book.author, category.name as category
+          FROM book, category 
+          WHERE category_id = category.id";
+          $result = mysqli_query($conn, $sql);
         ?>
 
         <?php while($row=mysqli_fetch_assoc($result)):?>
@@ -48,39 +56,39 @@
         <td><?php echo $row['category']?></td>
         <td><?php echo $row['publicationYear']?></td>
         <td><a href="modify.php?id=<?=$row['id']?>"><button>Modify</button></a>&nbsp;
-        &nbsp;<a href="?id=<?=$row['id']?>"><button>Delete</button></a></td>
+        &nbsp;<button onclick="func(<?=$row['id']?>)" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></td>
         </tr>
         <?php endwhile;?>
 
     </tbody>
     </table>         
         
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure to delete this book !
+          </div>
+          <div class="modal-footer">
+            <form action="" method="POST">
+              <input type="hidden" id="modal_id" name="id_to_delete">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" name="confirm_delete">Save changes</button>
+            </form>    
+          </div>
+          
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
 
-    <script src="assets/js/vendor.min.js"></script>
+  <script src="assets/js/vendor.min.js"></script>
 	<script src="assets/js/app.min.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
