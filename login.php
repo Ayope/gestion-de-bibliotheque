@@ -45,24 +45,25 @@
 
     <div class="d-flex justify-content-center align-items-center formLogin">
         
-        <form action="" method="POST">
+        <form id="loginForm" action="" method="POST">
         <div class="text-center mb-4">
             <img class="books" src="assets/img/book.png"/>
             <h1 id="title">Login</h1>
         </div>
         
         <div class="pb-3">
-            <label for="email_inpt" id="emaiLabel">Email</label>
-            <input type="email" id="email_inpt" class="form-control" name="email" required>
+            <label for="email_inpt1" id="emaiLabel">Email</label>
+            <input type="email" id="email_inpt1" class="form-control"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Invalid email address" name="email" required>
         </div>
 
         <div>
-            <label for="pass_inpt" id="passLabel">Password</label>
-            <input type="password" id="pass_inpt" class="form-control " size="25" name="password" required>
+            <label for="pass_inpt1" id="passLabel">Password</label>
+            <input type="password" id="pass_inpt1" class="form-control " size="25" name="password" required>
         </div>
 
         <div class="mt-2 text-center">
-            <button type="submit" class="mt-2 w-100 rounded-pill p-2 text-white fw-bold" style="border:none; background: #523A28;" name="login">Login</button>
+            <button id="login" type="submit" class="mt-2 w-100 rounded-pill p-2 text-white fw-bold" style="border:none; background: #523A28;" name="login">Login</button>
         </div>
         
         <div class="text-center mt-3">

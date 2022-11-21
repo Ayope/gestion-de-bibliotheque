@@ -29,9 +29,21 @@
     <!---->
 </head>
 <body >
-    <?php echo "Welcome ". $name;?>
+   
+    
 
-    <nav class="navbar navbar-light navbar1">
+
+
+
+
+
+
+
+
+
+    <?php // echo "Welcome ". $name;?>
+
+    <!-- <nav class="navbar navbar-light navbar1">
         <span class="navbar-brand fs-2 ms-3 text-white ">Dashboard</span>
         <a href="logout.php"><button class="border-0 rounded-pill py-2 px-3 fw-bold navbar-btn text-white me-2"><i class="bi bi-box-arrow-right"></i>&nbsp;Log out</button></a>
     </nav>
@@ -63,6 +75,6 @@
                 </ul>
             </div>
         </div>
-    </div> 
+    </div>  -->
 </body>
 </html>

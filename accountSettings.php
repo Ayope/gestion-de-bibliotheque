@@ -71,8 +71,7 @@
         <div>
             <label for="password">Password*</label>
             <input type="password" name="password" id="password" value = "<?=$row['password'];?>" required>
-            <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
-
+            <i class="far fa-eye" onclick="passhow()" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
         </div>
 
         <div>
