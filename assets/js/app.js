@@ -2,14 +2,11 @@ function func(id){
     document.getElementById("modal_id").value=id;
 }
 
-const togglePassword = document.querySelector("#togglePassword");
 const password = document.querySelector("#password");
 
 function passhow(){
     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
     password.setAttribute('type', type);
-
-    togglePassword.classList.toggle('fa-eye-slash');
 }
 
 var btnSignUp = document.getElementById("signup");
