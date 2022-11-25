@@ -9,7 +9,7 @@
   $name = mysqli_fetch_column($result, 0);
 
   if(!isset($_SESSION['id'])){
-      header('location: login.php');
+      header('location: index.php');
   }
 ?>
 
@@ -100,14 +100,43 @@
 		
 		<!-- BEGIN content -->
 		<div id="content" class="app-content mt-3">
-    <?php if (isset($_SESSION['Success1Message'])) : ?>         
-        <div class="alert alert-success">
-          <?php 
-              echo $_SESSION['Success1Message'];
-              unset($_SESSION['Success1Message']);             
-          ?>             
+
+      <?php if (isset($_SESSION['smtng'])) : ?> 
+        <div class="alert alert-danger">
+        <?php 
+            echo $_SESSION['smtng'];
+            unset($_SESSION['smtng']);             
+        ?>             
         </div>     
+      <?php endif ?>
+
+    <?php if (isset($_SESSION['img_size_err'])) : ?> 
+      <div class="alert alert-danger">
+      <?php 
+          echo $_SESSION['img_size_err'];
+          unset($_SESSION['img_size_err']);             
+      ?>             
+      </div>     
     <?php endif ?>
+             
+    <?php if (isset($_SESSION['img_type_err'])) : ?> 
+      <div class="alert alert-danger">
+      <?php 
+          echo $_SESSION['img_type_err'];
+          unset($_SESSION['img_type_err']);             
+      ?>             
+      </div>     
+    <?php endif ?>  
+
+    <?php if (isset($_SESSION['Success1Message'])) : ?>         
+      <div class="alert alert-success">
+      <?php 
+        echo $_SESSION['Success1Message'];
+        unset($_SESSION['Success1Message']);             
+      ?>             
+      </div>     
+    <?php endif ?>
+    
     <h1 class="pt-5">This is your Books list 📚</h1>
     <div class="table-responsive py-3 px-3">
     <table class="table table-bordered border-dark">
@@ -115,15 +144,16 @@
         <tr>
         <th scope="col">ISBN</th>
         <th scope="col">Name</th>
+        <th scope="col">Image</th>
         <th scope="col">Author</th>
         <th scope="col">category</th>
         <th scope="col">Year of Publication</th>
-        <th scope="col">Modify & Delete</th>
+        <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
         <?php
-          $sql ="SELECT book.id, book.isbn, book.name, book.publicationYear, book.author, category.name as category
+          $sql ="SELECT book.id, book.isbn, book.name, book.publicationYear, book.author, book.img_url , category.name as category
           FROM book, category 
           WHERE category_id = category.id";
           $result = mysqli_query($conn, $sql);
@@ -133,6 +163,7 @@
         <tr>
         <td><?php echo $row['isbn']?></td>
         <td><?php echo $row['name']?></td>
+        <td><img src="assets/img/bookCover/<?=$row['img_url']?>" height=130px width=90px></td>
         <td><?php echo $row['author']?></td>
         <td><?php echo $row['category']?></td>
         <td><?php echo $row['publicationYear']?></td>

@@ -9,7 +9,7 @@
     $name = mysqli_fetch_column($result, 0);
 
     if(!isset($_SESSION['id'])){
-        header('location: login.php');
+        header('location: index.php');
     }
 ?>
 
@@ -30,9 +30,58 @@
     <link href="assets/css/main.css" rel="stylesheet"/>
     <!---->
 </head>
-<body>
+<body style="overflow-y: auto">
     <?php
+        $sql = "SELECT id, isbn, name, publicationYear, author, img_url, category_id
+        FROM book
+        WHERE id = $_GET[id];";
+        $result = mysqli_query($conn, $sql);
+
+        $row = mysqli_fetch_assoc($result);
+
+        // $_SESSION['smtng']=  $row['img_url'];
+
+
         if(isset($_POST['Save'])){
+            $new_img_name;
+            
+            if(isset($_FILES['img'])){
+            
+                $img_name = $_FILES['img']['name'];
+                $img_type = $_FILES['img']['type'];
+                $tmp_name = $_FILES['img']['tmp_name'];
+                $error = $_FILES['img']['error'];
+                $img_size = $_FILES['img']['size'];
+    
+    
+                if($error === 0){
+                    if($img_size > 500000){
+                        $_SESSION['img_size_err'] = "Sorry your image is too large (maximum of 500KB allowed)";
+                        $new_img_name = $row['img_url'];
+                    } else{
+                        $img_extns = pathinfo($img_name, PATHINFO_EXTENSION);
+                        $img_extns_lowCase = strtolower($img_extns);
+    
+                        $allowed_extns = array("jpg", "png", "jpeg");
+                        if(in_array($img_extns_lowCase, $allowed_extns)){
+                            $new_img_name = uniqid("IMG-", true). '.' .$img_extns_lowCase;
+                            $path = 'assets/img/bookCover/'.$new_img_name;
+                            move_uploaded_file($tmp_name, $path);
+                        }else{
+                            $_SESSION['img_type_err'] = "Image type not allowed";
+                            $new_img_name = $row['img_url'];
+                        }
+                    }
+                } else {
+                    $new_img_name = $row['img_url'];
+                }
+            }else{ 
+                $_SESSION['smtng'] = "error";
+                $new_img_name = $row['img_url'];
+            }
+
+            // $_SESSION['smtng'] = $new_img_name;
+
             $isbn = $_POST['ISBN'];
             $name = $_POST['Name'];
             $author = $_POST['Author'];
@@ -50,24 +99,20 @@
                 $_SESSION['ErrorMessage'] = "Already Exist";
             }else{
                 $sql =  "UPDATE book 
-                SET `isbn`='$isbn',`name`='$name',`publicationYear`='$year',`category_id`='$category',`author`='$author' 
+                SET `isbn`='$isbn',`name`='$name',`publicationYear`='$year',`category_id`='$category',`author`='$author',`img_url`='$new_img_name'
                 WHERE id = $_GET[id];";
                 $result = mysqli_query($conn, $sql);
 
-    
+                
+                // echo $sql ;
                 header('location: booksList.php');
                 
-                $_SESSION['Success1Message']="you modified a book successfully";
+                $_SESSION['Success1Message']="you modified your book successfully";
             }
 
         }
 
-        $sql = "SELECT id, isbn, name, publicationYear, author, category_id
-        FROM book
-        WHERE id = $_GET[id];";
-        $result = mysqli_query($conn, $sql);
 
-        $row = mysqli_fetch_assoc($result);
     
     ?>
 
@@ -143,7 +188,13 @@
             
             <h1 class="pt-5">Modify a book 📝</h1>
             
-            <form action="" method="POST" class="col-12 col-md-6">
+            <form action="" method="POST" class="col-12 col-md-6" enctype="multipart/form-data">
+                
+                <div class="mb-2">
+                    <label for="img_input">Image</label>
+                    <input type="file" class="form-control" name="img" id="img_inpt">
+                </div>
+
                 <div class="mb-2">
                     <label for="isbn">ISBN</label>
                     <input  class="form-control" type="text" name="ISBN" id="isbn" 

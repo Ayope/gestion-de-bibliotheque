@@ -41,7 +41,7 @@
 
                 $result = mysqli_query($conn, $sql);
 
-                header('location: login.php');
+                header('location: index.php');
             } else{
                 echo '<div class="alert alert-danger" role="alert">Account already Exist</div>';
             }

@@ -1,6 +1,0 @@
-<?php
-    include 'db.php';
-     
-
-    
-    

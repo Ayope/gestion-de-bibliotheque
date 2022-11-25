@@ -9,7 +9,7 @@
     $name = mysqli_fetch_column($result, 0);
 
     if(!isset($_SESSION['id'])){
-        header('location: login.php');
+        header('location: index.php');
     }
 ?>
 
