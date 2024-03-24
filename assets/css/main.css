@@ -3,6 +3,8 @@
 body{
     background-color: #FFF7EA;
     overflow: hidden;
+    font-weight: bolder;
+    font-family: 'Inter', sans-serif;
 }
 
 
@@ -74,12 +76,45 @@ body{
     background-color:#3F2918;
 }
 
+#header{
+    background-color: #3F2918;
+}
+
+#sidebarCont{
+    background-color: #523A28;
+}
+
 .navbar-btn{
     background-color: #C65234;
 }
 
-@media (max-width: 630px){
-    
-
+#username_err{
+    display: none;
 }
 
+#email_err{
+    display: none;
+}
+
+#pass_err{
+    display: none;
+}
+
+#signup:disabled{
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.pace ,.pace-inactive{
+    display: none;
+}
+
+
+@media(max-width: 767px){
+    body{
+        overflow: scroll;
+    }
+}
