@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+body{
+    background-color: #FFF7EA;
+    overflow: hidden;
+}
+
+
+.formLogin{
+    height: 100vh;
+    font-weight: bolder;
+    font-family: 'Inter', sans-serif;
+}
+
+.books{
+    height: 4em;
+}
+
+#title{
+    font-weight: bolder;
+}
+#title, #emaiLabel, #passLabel, #usernameLabel{
+    color: #523A28;
+}
+
+/*Dashboard*/
+
+#sideNav{
+    background: #523A28;
+    min-width:20%; 
+    max-width:20%;
+    min-height: 100vh;
+    width: 100%;
+}
+/* .main-container{
+    min-height: 100vh;
+    min-width: 20%;
+} */
+
+
+#DropBooks, .item ul{
+    display:none;
+}
+
+.item input:checked ~ ul{
+    display: block;
+}
+
+.item label:hover{
+    cursor: pointer;
+}
+
+.arrow{
+    width:12px;
+}
+
+.dashboard:hover{
+    background-color: #3F2918;
+}
+
+.bookdrop:hover{
+    background-color: #3F2918;
+}
+
+.bookop1:hover{
+    background-color: #3F2918;
+}
+
+.bookop2:hover{
+    background-color: #3F2918;
+}
+
+.navbar1{
+    background-color:#3F2918;
+}
+
+.navbar-btn{
+    background-color: #C65234;
+}
+
+@media (max-width: 630px){
+    
+
+}
+
